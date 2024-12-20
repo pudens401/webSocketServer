@@ -6,7 +6,7 @@ let server = http.createServer((req, res) => {
     if (req.method === 'GET' && req.url === '/') {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.end('WebSocket server is running. Use a WebSocket client to connect.');
-    } else if (req.method === 'POST' && req.url === '/restart') {
+    } else if (req.method === 'GET' && req.url === '/restart') {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.end('Server is restarting...');
         restartServer();
