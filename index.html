@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Client</title>
+</head>
+<body>
+    <h1>WebSocket Client</h1>
+    <input id="message" type="text" placeholder="Enter message" />
+    <button onclick="sendMessage()">Send</button>
+    <div id="log"></div>
+
+    <script>
+        const log = document.getElementById('log');
+        const ws = new WebSocket('wss://gd-websockets.onrender.com:8080');
+
+        ws.onopen = () => log.innerHTML += '<p>Connected to server</p>';
+        ws.onmessage = (event) => log.innerHTML += `<p>Received: ${event.data}</p>`;
+        ws.onclose = () => log.innerHTML += '<p>Disconnected from server</p>';
+
+        function sendMessage() {
+            const message = document.getElementById('message').value;
+            ws.send(message);
+            log.innerHTML += `<p>Sent: ${message}</p>`;
+        }
+    </script>
+</body>
+</html>
